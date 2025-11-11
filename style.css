@@ -1,0 +1,314 @@
+/* ======================================= */
+/* ===== 1. Fuente, colores, Base ===== */
+/* ======================================= */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; 
+    background: #ffffff;
+    color: #222;
+    overflow: hidden; 
+}
+
+h2 {
+    font-family: 'Playfair Display', serif; 
+    font-weight: 700;
+    color: #0047AB; 
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #444;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+/* ======================================= */
+/* ===== 2. Menú (Navegación) ===== */
+/* ======================================= */
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 1000;
+}
+
+.menu ul {
+    margin: 0;
+    padding: 12px 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #0047AB;
+    font-weight: 500;
+    transition: opacity .3s;
+}
+
+.menu a:hover {
+    opacity: .6;
+}
+
+/* ======================================= */
+/* ===== 3. Secciones Generales ===== */
+/* ======================================= */
+.section {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    padding: 0 12%; 
+    box-sizing: border-box;
+}
+
+.section.visible {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+}
+
+/* ===== Portada ===== */
+#portada {
+    overflow: hidden;
+    padding-top: 90px; 
+    justify-content: flex-start; 
+}
+
+.portada-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.portada-container img {
+    /* 1. Portada más grande */
+    max-width: 75%; 
+    height: auto;
+}
+
+/* ======================================= */
+/* ===== 4. Bio (Sticky/Fija) ===== */
+/* ======================================= */
+#bio {
+    overflow-y: auto; 
+    align-items: flex-start; 
+    padding-top: 90px; 
+    padding-bottom: 50px; 
+}
+
+.bio-container {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: flex-start; 
+    max-width: 1000px; 
+    margin: auto;
+    width: 100%;
+}
+
+.bioimg {
+    width: 300px; 
+    height: auto;
+    border-radius: 12px;
+    position: sticky; 
+    top: 0px; 
+    flex-shrink: 0; 
+}
+
+.bio-text {
+    max-width: 640px; 
+    line-height: 1.65;
+    /* 2. Letra de Bio más chica */
+    font-size: 12px; 
+}
+
+.bio-text p {
+    margin-bottom: 15px;
+}
+
+.bio-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.bio-section ul li {
+    margin-bottom: 5px;
+}
+
+/* ======================================= */
+/* ===== 5. Statement (Flujo de Texto) ===== */
+/* ======================================= */
+#statement {
+    display: block; 
+    overflow-y: auto;
+    text-align: left; 
+    padding-top: 90px; 
+    padding-bottom: 50px;
+}
+
+#statement h2 {
+    text-align: center;
+}
+
+#statement p {
+    line-height: 1.8;
+    margin-bottom: 25px; 
+    font-size: 14px;
+}
+
+/* ======================================= */
+/* ===== 6. Pinturas y Lightbox ===== */
+/* ======================================= */
+/* ESTE ES EL NUEVO CÓDIGO QUE DEBES AÑADIR */
+
+
+#pinturas {
+    overflow-y: auto;
+    align-items: center; 
+    padding-top: 90px; 
+    padding-bottom: 50px;
+}
+
+.gallery {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.92);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2000;
+}
+
+.lightbox img {
+    max-width: 80%;
+    max-height: 80%;
+    margin-bottom: 10px;
+}
+
+.lightbox p {
+    color: #fff;
+    font-size: 15px;
+    max-width: 90%;
+    text-align: center;
+}
+
+.close, .prev, .next {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity .2s;
+}
+
+.close:hover, .prev:hover, .next:hover { opacity: .7; }
+.close { top: 20px; right: 30px; }
+.prev { left: 40px; top: 50%; transform: translateY(-50%); }
+.next { right: 40px; top: 50%; transform: translateY(-50%); }
+
+/* ======================================= */
+/* ===== 7. Contacto (Arreglado) ===== */
+/* ======================================= */
+#contacto {
+    overflow: hidden;
+    padding-top: 90px; 
+    /* 3. Esta regla VITAL hace que Contacto se vea */
+    justify-content: flex-start; 
+}
+
+.contacto-box {
+    text-align: center; 
+    line-height: 1.8;
+}
+
+.contacto-box a {
+    color: #0047AB;
+}
+
+
+/* ======================================= */
+/* ===== 8. Media Queries (Móviles) ===== */
+/* ======================================= */
+@media (max-width: 768px) {
+
+    .section {
+        padding: 0 6%; 
+    }
+    
+    .menu ul {
+        gap: 1rem; 
+        font-size: 14px;
+    }
+
+    .bio-container {
+        flex-direction: column; 
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .bioimg {
+        width: 70%;
+        max-width: 250px;
+        position: static; 
+    }
+    
+    .bio-text {
+        max-width: 100%; 
+    }
+    
+    .bio-section ul {
+        text-align: left; 
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    .gallery img {
+        height: 120px;
+    }
+
+    .close, .prev, .next {
+        font-size: 28px;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+}
