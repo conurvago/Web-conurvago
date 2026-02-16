@@ -3,115 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sitio oficial del artista visual Nahuel Tribulo (Conurvago): obra, bio, statement y contacto.">
     <title>Conurvago - Nahuel Tribulo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="menu">
+<nav class="menu" aria-label="Navegación principal">
     <ul>
-        <li><a href="#portada" onclick="showSection('portada')">Inicio</a></li>
-        <li><a href="#bio" onclick="showSection('bio')">Bio</a></li>
-        <li><a href="#pinturas" onclick="showSection('pinturas')">Pinturas</a></li>
-        <li><a href="#statement" onclick="showSection('statement')">Statement</a></li>
-        <li><a href="#contacto" onclick="showSection('contacto')">Contacto</a></li>
+        <li><a href="#portada" data-section="portada">Inicio</a></li>
+        <li><a href="#bio" data-section="bio">Bio</a></li>
+        <li><a href="#pinturas" data-section="pinturas">Pinturas</a></li>
+        <li><a href="#statement" data-section="statement">Statement</a></li>
+        <li><a href="#contacto" data-section="contacto">Contacto</a></li>
     </ul>
 </nav>
 
-    <section id="portada" class="section visible">
-        <div class="portada-container">
-            <img src="Portada.jpg" alt="Obra de arte principal del artista Nahuel Tribulo">
-        </div>
-    </section>
+    <main>
+        <section id="portada" class="section visible">
+            <div class="portada-container">
+                <img src="Portada.jpg" alt="Obra de arte principal del artista Nahuel Tribulo" fetchpriority="high">
+                <p class="portada-copy">Pintura contemporánea desde el conurbano bonaerense.</p>
+            </div>
+        </section>
 
-    <section id="bio" class="section">
-        <div class="bio-container">
-            <img src="Bioimg.jpg" alt="Foto Nahuel Tribulo" class="bioimg">
-            <div class="bio-text">
-                <h2>Nahuel Tribulo</h2>
-                <p>
-                    Artista visual oriundo de Billinghurst, General San Martín, Provincia de Buenos Aires. Actualmente se encuentra finalizando la Licenciatura en Artes Visuales en la Universidad Nacional de las Artes (UNA). Su formación combina el ámbito académico con talleres de producción y práctica sostenida en el territorio, donde la observación cotidiana y las escenas del conurbano bonaerense se configuran como núcleo central de su obra.
-                </p>
-                <p>
-                    Se formó en el taller de pintura de Julián Caprara (2021–2024), en un taller de dibujo con Diego Parés en la Escuela OLA (2018) y previamente en el taller de dibujo con Santiago Dufour en la Escuela de Carlos Garaycochea (2017). Su producción se desarrolla principalmente en pintura, donde explora situaciones comunes, vínculos, modos de habitar y una poética de lo barrial que combina naturalismo, extrañamiento y cierta deriva surreal.
-                </p>
-                <div class="bio-section">
-                    <h3>Exposiciones</h3>
-                    <p>Ha participado en diversas exposiciones y salones, entre los cuales se destacan:</p>
-                    <ul>
-                        <li>Salón Nacional de Artes Visuales, Azul, Buenos Aires (2025).</li>
-                        <li>Premio Prilidiano Pueyrredón, Casa Nacional del Bicentenario, CABA (2025).</li>
-                        <li>“Barrial Fantasy”, Fábrica de Estampas, CABA (2025).</li>
-                        <li>“Qué es arte?”, Museo Casa Carnacini, San Martín (2025).</li>
-                        <li>XXI Salón Pequeño Formato, Centro Cultural Médanos, La Pampa (2025).</li>
-                        <li>Salón Provincial de Arte Joven, Museo Pettoruti, La Plata (2023).</li>
-                    </ul>
+        <section id="bio" class="section">
+            <div class="bio-container">
+                <img src="Bioimg.jpg" alt="Foto Nahuel Tribulo" class="bioimg" loading="lazy">
+                <div class="bio-text">
+                    <h2>Nahuel Tribulo</h2>
+                    <p>
+                        Artista visual oriundo de Billinghurst, General San Martín, Provincia de Buenos Aires. Actualmente se encuentra finalizando la Licenciatura en Artes Visuales en la Universidad Nacional de las Artes (UNA). Su formación combina el ámbito académico con talleres de producción y práctica sostenida en el territorio, donde la observación cotidiana y las escenas del conurbano bonaerense se configuran como núcleo central de su obra.
+                    </p>
+                    <p>
+                        Se formó en el taller de pintura de Julián Caprara (2021–2024), en un taller de dibujo con Diego Parés en la Escuela OLA (2018) y previamente en el taller de dibujo con Santiago Dufour en la Escuela de Carlos Garaycochea (2017). Su producción se desarrolla principalmente en pintura, donde explora situaciones comunes, vínculos, modos de habitar y una poética de lo barrial que combina naturalismo, extrañamiento y cierta deriva surreal.
+                    </p>
+                    <div class="bio-section">
+                        <h3>Exposiciones</h3>
+                        <p>Ha participado en diversas exposiciones y salones, entre los cuales se destacan:</p>
+                        <ul>
+                            <li>Salón Nacional de Artes Visuales, Azul, Buenos Aires (2025).</li>
+                            <li>Premio Prilidiano Pueyrredón, Casa Nacional del Bicentenario, CABA (2025).</li>
+                            <li>“Barrial Fantasy”, Fábrica de Estampas, CABA (2025).</li>
+                            <li>“Qué es arte?”, Museo Casa Carnacini, San Martín (2025).</li>
+                            <li>XXI Salón Pequeño Formato, Centro Cultural Médanos, La Pampa (2025).</li>
+                            <li>Salón Provincial de Arte Joven, Museo Pettoruti, La Plata (2023).</li>
+                        </ul>
+                    </div>
+                    <div class="bio-section">
+                        <h3>Premios</h3>
+                        <p>Obtuvo el Premio Instituto Cultural en el Salón Provincial de Arte Joven (2023) por la obra <em>Tarde en el rioba</em>.</p>
+                    </div>
                 </div>
-                <div class="bio-section">
-                    <h3>Premios</h3>
-                    <p>Obtuvo el Premio Instituto Cultural en el Salón Provincial de Arte Joven (2023) por la obra <em>Tarde en el rioba</em>.</p>
-                </div>
-            </div> </div> </section> <section id="pinturas" class="section">
-        <h2>Galería</h2>
-        <div class="gallery">
-            <img src="Obra1.jpg" alt="Gaucho turro - óleo s/tela - 2024" onclick="openLightbox(0)">
-            <img src="Obra2.jpg" alt="Ranchada - óleo s/tela - 2025" onclick="openLightbox(1)">
-            <img src="Obra3.jpg" alt="Tarde en el rioba - óleo s/tela - 2023" onclick="openLightbox(2)">
-            <img src="Obra4.jpg" alt="El rioba - acrílico s/papel - 2022" onclick="openLightbox(3)">
-            <img src="Obra5.jpg" alt="Clásico - óleo s/tela - 2024" onclick="openLightbox(4)">
-            <img src="Obra6.jpg" alt="El perrito se fue de casa - óleo s/tela - 2024" onclick="openLightbox(5)">
-            <img src="Obra7.jpg" alt="Debí terminar mis pinturas - óleo s/papel - 2025" onclick="openLightbox(6)">
-            <img src="Obra8.jpg" alt="Bebu - óleo s/tela - 2024" onclick="openLightbox(7)">
-            <img src="Obra9.jpg" alt="Clark Kent - óleo s/papel - 2024" onclick="openLightbox(8)">
-            <img src="Obra10.jpg" alt="Perreo otoñal - óleo s/tela - 2024" onclick="openLightbox(9)">
-            <img src="Obra11.jpg" alt="La noche - óleo s/tela - 2024" onclick="openLightbox(10)">
-            <img src="Obra12.jpg" alt="Los ladris - óleo s/tela - 2024" onclick="openLightbox(11)">
-        </div>
+            </div>
+        </section>
 
-        <div id="lightbox" class="lightbox">
-            <span class="close" onclick="closeLightbox()">×</span>
-            <span class="prev" onclick="changeImage(-1)">‹</span>
-            <img id="lightbox-img" src="" alt="Imagen ampliada de la galería">
-            <span class="next" onclick="changeImage(1)">›</span>
-            <p id="lightbox-desc"></p>
-        </div>
-    </section>
+        <section id="pinturas" class="section">
+            <h2>Galería</h2>
+            <div class="gallery">
+                <img src="Obra1.jpg" alt="Gaucho turro - óleo s/tela - 2024" data-index="0" tabindex="0" loading="lazy">
+                <img src="Obra2.jpg" alt="Ranchada - óleo s/tela - 2025" data-index="1" tabindex="0" loading="lazy">
+                <img src="Obra3.jpg" alt="Tarde en el rioba - óleo s/tela - 2023" data-index="2" tabindex="0" loading="lazy">
+                <img src="Obra4.jpg" alt="El rioba - acrílico s/papel - 2022" data-index="3" tabindex="0" loading="lazy">
+                <img src="Obra5.jpg" alt="Clásico - óleo s/tela - 2024" data-index="4" tabindex="0" loading="lazy">
+                <img src="Obra6.jpg" alt="El perrito se fue de casa - óleo s/tela - 2024" data-index="5" tabindex="0" loading="lazy">
+                <img src="Obra7.jpg" alt="Debí terminar mis pinturas - óleo s/papel - 2025" data-index="6" tabindex="0" loading="lazy">
+                <img src="Obra8.jpg" alt="Bebu - óleo s/tela - 2024" data-index="7" tabindex="0" loading="lazy">
+                <img src="Obra9.jpg" alt="Clark Kent - óleo s/papel - 2024" data-index="8" tabindex="0" loading="lazy">
+                <img src="Obra10.jpg" alt="Perreo otoñal - óleo s/tela - 2024" data-index="9" tabindex="0" loading="lazy">
+                <img src="Obra11.jpg" alt="La noche - óleo s/tela - 2024" data-index="10" tabindex="0" loading="lazy">
+                <img src="Obra12.jpg" alt="Los ladris - óleo s/tela - 2024" data-index="11" tabindex="0" loading="lazy">
+            </div>
 
-    <section id="statement" class="section">
-        <h2>Statement</h2>
-        <p>
-            En mi obra exploro las relaciones entre personas, objetos y espacios que configuran mi cotididianeidad en el conurbano. Paisajes y situaciones frecuentes que me permiten mostrar una identidad cultural de la cual formo parte, y sobre la que quiero testimoniar.
-        </p>
-        <p>
-            Me sitúo como pintor que retoma algunas ideas de la pintura de fines del siglo XX, donde la mirada se posa sobre las características de una época y de un lugar, como en la pintura de Fader, donde se quiere incorporar al campo del arte la vida social que se desarrolla en ciertas comunidades. 
-        </p>
-        <p>
-            Trabajo con la fotografía, con mi dispositivo celular o cualquier otro al alcance. Puedo captar cosas que me asaltan a cada momento: un paisaje, una situación en la calle, cosas con las que me tropiezo sin estar buscándolas. La pintura me da la posibilidad de alentar la relación que tengo con esa imagen captada en la inmediatez. 
-        </p>
-        <p>
-            Mientras pinto, la reflexión sobre la escena se vuelve más profunda, cargándose con mi tiempo, con el tiempo de la pintura, con la materia y la tradición de la misma. La temática entonces de la imagen empieza a transformarse y tomar rumbos insospechados al momento de la captura fotográfica. Lo visible y lo invisible de aquello que constituye una identidad se abre paso durante el proceso de pintar.
-        </p>
-        <p>
-            De este modo, mi obra se transforma en un espacio de conversación abierto, que se inicia conmigo y la imagen inicial, y luego entre la obra y el espectador, que proyecta sus propios significados y formas de ver la realidad.
-        </p>
-    </section>
+            <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
+                <button class="close" type="button" aria-label="Cerrar visor">×</button>
+                <button class="prev" type="button" aria-label="Imagen anterior">‹</button>
+                <img id="lightbox-img" src="" alt="Imagen ampliada de la galería">
+                <button class="next" type="button" aria-label="Siguiente imagen">›</button>
+                <p id="lightbox-desc" aria-live="polite"></p>
+            </div>
+        </section>
 
-    <section id="contacto" class="section">
-        <div class="contacto-box">
-            <h2>Contacto</h2>
-            <p><strong>Email:</strong><br>
-                <a href="mailto:nahueltribulo@gmail.com">nahueltribulo@gmail.com</a>
+        <section id="statement" class="section">
+            <h2>Statement</h2>
+            <p>
+                En mi obra exploro las relaciones entre personas, objetos y espacios que configuran mi cotidianidad en el conurbano. Paisajes y situaciones frecuentes que me permiten mostrar una identidad cultural de la cual formo parte, y sobre la que quiero testimoniar.
             </p>
-            <p><strong>Instagram:</strong><br>
-                <a href="https://www.instagram.com/conurvago" target="_blank">@conurvago</a>
+            <p>
+                Me sitúo como pintor que retoma algunas ideas de la pintura de fines del siglo XX, donde la mirada se posa sobre las características de una época y de un lugar, como en la pintura de Fader, donde se quiere incorporar al campo del arte la vida social que se desarrolla en ciertas comunidades.
             </p>
-        </div>
-    </section>
+            <p>
+                Trabajo con la fotografía, con mi dispositivo celular o cualquier otro al alcance. Puedo captar cosas que me asaltan a cada momento: un paisaje, una situación en la calle, cosas con las que me tropiezo sin estar buscándolas. La pintura me da la posibilidad de alentar la relación que tengo con esa imagen captada en la inmediatez.
+            </p>
+            <p>
+                Mientras pinto, la reflexión sobre la escena se vuelve más profunda, cargándose con mi tiempo, con el tiempo de la pintura, con la materia y la tradición de la misma. La temática entonces de la imagen empieza a transformarse y tomar rumbos insospechados al momento de la captura fotográfica. Lo visible y lo invisible de aquello que constituye una identidad se abre paso durante el proceso de pintar.
+            </p>
+            <p>
+                De este modo, mi obra se transforma en un espacio de conversación abierto, que se inicia conmigo y la imagen inicial, y luego entre la obra y el espectador, que proyecta sus propios significados y formas de ver la realidad.
+            </p>
+        </section>
+
+        <section id="contacto" class="section">
+            <div class="contacto-box">
+                <h2>Contacto</h2>
+                <p><strong>Email:</strong><br>
+                    <a href="mailto:nahueltribulo@gmail.com">nahueltribulo@gmail.com</a>
+                </p>
+                <p><strong>Instagram:</strong><br>
+                    <a href="https://www.instagram.com/conurvago" target="_blank" rel="noopener noreferrer">@conurvago</a>
+                </p>
+            </div>
+        </section>
+    </main>
 
     <script>
         let currentIndex = 0;
+        const links = document.querySelectorAll('.menu a[data-section]');
+        const sections = document.querySelectorAll('.section');
         const images = Array.from(document.querySelectorAll('.gallery img'));
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxDesc = document.getElementById('lightbox-desc');
         const descriptions = [
             "Gaucho turro - óleo s/tela - 2024",
             "Ranchada - óleo s/tela - 2025",
@@ -127,46 +140,75 @@
             "Los ladris - óleo s/tela - 2024"
         ];
 
+        function setActiveLink(id) {
+            links.forEach(link => {
+                const isActive = link.dataset.section === id;
+                link.classList.toggle('active', isActive);
+                link.setAttribute('aria-current', isActive ? 'page' : 'false');
+            });
+        }
+
         function showSection(id) {
-            /* Ya no necesitamos el 'event' porque body {overflow: hidden} 
-               previene el salto de página */
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-            document.getElementById(id).classList.add('visible');
+            sections.forEach(section => section.classList.remove('visible'));
+            const selectedSection = document.getElementById(id);
+            if (!selectedSection) return;
+            selectedSection.classList.add('visible');
+            setActiveLink(id);
         }
 
         function openLightbox(index) {
             currentIndex = index;
-            document.getElementById('lightbox').style.display = 'flex';
-            document.getElementById('lightbox-img').src = images[index].src;
-            document.getElementById('lightbox-img').alt = images[index].alt; 
-            document.getElementById('lightbox-desc').textContent = descriptions[index] || '';
+            lightbox.style.display = 'flex';
+            lightboxImg.src = images[index].src;
+            lightboxImg.alt = images[index].alt;
+            lightboxDesc.textContent = descriptions[index] || '';
             document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            document.body.style.overflow = 'hidden'; 
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'hidden';
         }
 
         function changeImage(direction) {
             currentIndex = (currentIndex + direction + images.length) % images.length;
-            document.getElementById('lightbox-img').src = images[currentIndex].src;
-            document.getElementById('lightbox-img').alt = images[currentIndex].alt;
-            document.getElementById('lightbox-desc').textContent = descriptions[currentIndex];
+            lightboxImg.src = images[currentIndex].src;
+            lightboxImg.alt = images[currentIndex].alt;
+            lightboxDesc.textContent = descriptions[currentIndex] || '';
         }
 
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape" && document.getElementById('lightbox').style.display === 'flex') {
-                closeLightbox();
-            }
+        links.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                showSection(link.dataset.section);
+            });
+        });
+
+        images.forEach((image, index) => {
+            image.addEventListener('click', () => openLightbox(index));
+            image.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openLightbox(index);
+                }
+            });
+        });
+
+        document.querySelector('.close').addEventListener('click', closeLightbox);
+        document.querySelector('.prev').addEventListener('click', () => changeImage(-1));
+        document.querySelector('.next').addEventListener('click', () => changeImage(1));
+
+        document.addEventListener('keydown', (event) => {
+            if (lightbox.style.display !== 'flex') return;
+            if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'ArrowLeft') changeImage(-1);
+            if (event.key === 'ArrowRight') changeImage(1);
         });
 
         document.addEventListener('DOMContentLoaded', () => {
-            showSection('portada'); 
+            showSection('portada');
         });
     </script>
 
 </body>
-
 </html>
-
