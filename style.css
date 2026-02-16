@@ -173,11 +173,14 @@ h3 {
 /* ===== 5. Statement (Flujo de Texto) ===== */
 /* ======================================= */
 #statement {
-    display: block;
     overflow-y: auto;
     text-align: left;
     padding-top: 90px;
     padding-bottom: 50px;
+}
+
+#statement.visible {
+    display: block;
 }
 
 #statement h2 {
