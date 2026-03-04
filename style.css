@@ -180,7 +180,8 @@ h3 {
 }
 
 #statement.visible {
-    display: block;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #statement h2 {
