@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sitio oficial del artista visual Nahuel Tribulo (Conurvago): obra, bio, exposiciones y contacto.">
+    <title>Conurvago - Nahuel Tribulo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ======================================= */
+        /* ===== Exposiciones - Albums ===== */
+        /* ======================================= */
+        #exposiciones {
+            overflow-y: auto;
+            align-items: flex-start;
+            padding-top: 90px;
+            padding-bottom: 50px;
+        }
+
+        #exposiciones h2 {
+            width: 100%;
+            text-align: center;
+        }
+
+        .albums-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 10px;
+        }
+
+        .album-card {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+
+        .album-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .album-cover {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .album-info strong {
+            display: block;
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.3;
+            margin-top: 4px;
+        }
+
+        .album-info span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Vista interior del album */
+        .album-detail {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .album-detail.visible {
+            display: flex;
+        }
+
+        .album-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .btn-volver {
+            background: none;
+            border: 1px solid var(--blue);
+            color: var(--blue);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-volver:hover {
+            background: var(--blue);
+            color: white;
+        }
+
+        .album-detail-header h3 {
+            margin: 0 0 2px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--blue);
+        }
+
+        .album-detail-header p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .album-gallery {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        .album-gallery img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .album-gallery img:hover {
+            transform: scale(1.05);
+            outline: 2px solid var(--blue);
+            outline-offset: 2px;
+        }
+
+        .expo-subtitulo {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            margin: 28px 0 14px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+        }
+
+        .expo-subtitulo:first-child {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            #exposiciones {
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+
+            .albums-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 14px;
+            }
+
+            .album-info strong {
+                font-size: 12px;
+            }
+
+            .album-info span {
+                font-size: 11px;
+            }
+
+            .album-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 10px;
+            }
+
+            .album-gallery img {
+                height: 100px;
+            }
+
+            .album-detail-header {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .album-detail-header h3 {
+                font-size: 17px;
+            }
+
+            .btn-volver {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+
+            .expo-subtitulo {
+                font-size: 11px;
+                margin: 20px 0 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .albums-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .album-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .album-gallery img {
+                height: 130px;
+            }
+
+            .album-detail-header h3 {
+                font-size: 15px;
+            }
+        }
+
+        /* Tap highlight en mobile para album cards */
+        @media (hover: none) {
+            .album-card:hover {
+                transform: none;
+            }
+            .album-card:active {
+                transform: scale(0.97);
+            }
+            .album-gallery img:hover {
+                transform: none;
+                outline: none;
+            }
+            .album-gallery img:active {
+                transform: scale(0.97);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="menu" aria-label="Navegacion principal">
+    <ul>
+        <li><a href="#portada" data-section="portada">Inicio</a></li>
+        <li><a href="#bio" data-section="bio">Bio</a></li>
+        <li><a href="#pinturas" data-section="pinturas">Pinturas</a></li>
+        <li><a href="#exposiciones" data-section="exposiciones">Exposiciones</a></li>
+        <li><a href="#contacto" data-section="contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <!-- PORTADA -->
+    <section id="portada" class="section visible">
+        <div class="portada-container">
+            <img src="Portada.jpg" alt="Obra de arte principal del artista Nahuel Tribulo" fetchpriority="high" loading="eager">
+        </div>
+    </section>
+
+    <!-- BIO -->
+    <section id="bio" class="section">
+        <div class="bio-container">
+            <img src="Bioimg.jpg" alt="Foto Nahuel Tribulo" class="bioimg" loading="lazy">
+            <div class="bio-text">
+                <h2>Nahuel Tribulo</h2>
+                <p>
+                    Artista visual oriundo de Billinghurst, General San Martin, Provincia de Buenos Aires. Actualmente se encuentra cursando la Licenciatura en Artes Visuales en la Universidad Nacional de las Artes (UNA). Su formacion combina el ambito academico con talleres de produccion y practica sostenida, donde la observacion cotidiana y las escenas del conurbano bonaerense se configuran como nucleo central de su obra.
+                </p>
+                <p>
+                    Se formo en el taller de pintura de Julian Caprara (2021-2024), hizo taller de dibujo con Diego Pares en la Escuela OLA (2018) y previamente en el taller de dibujo con Santiago Dufour en la Escuela de Carlos Garaycochea (2017). Su produccion se desarrolla principalmente en pintura, donde explora situaciones comunes, vinculos, modos de habitar y una poetica de lo barrial que combina naturalismo, extraniamiento y cierta deriva surreal.
+                </p>
+                <div class="bio-section">
+                    <h3>Exposiciones</h3>
+                    <p>Ha participado en diversas exposiciones y salones, entre los cuales se destacan:</p>
+                    <ul>
+                        <li>Salon Nacional de Artes Visuales, Azul, Buenos Aires (2025).</li>
+                        <li>Premio Prilidiano Pueyrredon, Casa Nacional del Bicentenario, CABA (2025).</li>
+                        <li>"Barrial Fantasy", Fabrica de Estampas, CABA (2025).</li>
+                        <li>"Que es arte?", Museo Casa Carnacini, San Martin (2025).</li>
+                        <li>XXI Salon Pequeno Formato, Centro Cultural Medanos, La Pampa (2025).</li>
+                        <li>Salon Provincial de Arte Joven, Museo Pettoruti, La Plata (2023).</li>
+                    </ul>
+                </div>
+                <div class="bio-section">
+                    <h3>Premios</h3>
+                    <p>Obtuvo el Premio Instituto Cultural en el Salon Provincial de Arte Joven (2023) por la obra <em>Tarde en el rioba</em>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PINTURAS -->
+    <section id="pinturas" class="section">
+        <h2>Galeria</h2>
+        <div class="gallery">
+            <img src="Obra1.jpg" alt="Gaucho turro - oleo s/tela - 2024" data-index="0" tabindex="0" loading="lazy">
+            <img src="Obra2.jpg" alt="Ranchada - oleo s/tela - 2025" data-index="1" tabindex="0" loading="lazy">
+            <img src="Obra3.jpg" alt="Tarde en el rioba - oleo s/tela - 2023" data-index="2" tabindex="0" loading="lazy">
+            <img src="Obra4.jpg" alt="El rioba - acrilico s/papel - 2022" data-index="3" tabindex="0" loading="lazy">
+            <img src="Obra5.jpg" alt="Clasico - oleo s/tela - 2024" data-index="4" tabindex="0" loading="lazy">
+            <img src="Obra6.jpg" alt="El perrito se fue de casa - oleo s/tela - 2024" data-index="5" tabindex="0" loading="lazy">
+            <img src="Obra7.jpg" alt="Debi terminar mis pinturas - oleo s/papel - 2025" data-index="6" tabindex="0" loading="lazy">
+            <img src="Obra8.jpg" alt="Bebu - oleo s/tela - 2024" data-index="7" tabindex="0" loading="lazy">
+            <img src="Obra9.jpg" alt="Clark Kent - oleo s/papel - 2024" data-index="8" tabindex="0" loading="lazy">
+            <img src="Obra10.jpg" alt="Perreo otonal - oleo s/tela - 2024" data-index="9" tabindex="0" loading="lazy">
+            <img src="Obra11.jpg" alt="La noche - oleo s/tela - 2024" data-index="10" tabindex="0" loading="lazy">
+            <img src="Obra12.jpg" alt="Los ladris - oleo s/tela - 2024" data-index="11" tabindex="0" loading="lazy">
+        </div>
+
+        <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imagenes">
+            <button class="close" type="button" aria-label="Cerrar visor">x</button>
+            <button class="prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+            <img id="lightbox-img" src="" alt="Imagen ampliada de la galeria">
+            <button class="next" type="button" aria-label="Siguiente imagen">&#8250;</button>
+            <p id="lightbox-desc" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <!-- EXPOSICIONES -->
+    <!--
+        COMO AGREGAR FOTOS:
+        - Portada del album:  NombreExpo_portada.jpg
+        - Fotos internas:     NombreExpo_1.jpg, NombreExpo_2.jpg, etc.
+        - Para agregar una expo nueva: copia un .album-card y su .album-detail,
+          asignales el mismo data-album="nombre-unico" en ambos.
+    -->
+    <section id="exposiciones" class="section">
+        <h2>Exposiciones</h2>
+
+        <!-- Grilla de albumes -->
+        <div id="albums-grid">
+
+            <h3 class="expo-subtitulo">Muestras</h3>
+            <div class="albums-grid">
+
+                <div class="album-card" data-album="muestra-3" tabindex="0" role="button" aria-label="Ver exposicion Matices de nuestra identidad">
+                    <img class="album-cover" src="Muestra3_portada.jpg" alt="Portada Matices de nuestra identidad" loading="lazy">
+                    <div class="album-info">
+                        <strong>Matices de nuestra identidad</strong>
+                        <span>Casa Mercado, San Martin</span>
+                    </div>
+                </div>
+
+                <div class="album-card" data-album="barrial-fantasy" tabindex="0" role="button" aria-label="Ver exposicion Barrial Fantasy">
+                    <img class="album-cover" src="BarrialFantasy_portada.jpg" alt="Portada Barrial Fantasy" loading="lazy">
+                    <div class="album-info">
+                        <strong>Barrial Fantasy</strong>
+                        <span>Fabrica de Estampas, CABA · 2025</span>
+                    </div>
+                </div>
+
+                <div class="album-card" data-album="que-es-arte" tabindex="0" role="button" aria-label="Ver exposicion Que es arte?">
+                    <img class="album-cover" src="QueEsArte_portada.jpg" alt="Portada Que es arte?" loading="lazy">
+                    <div class="album-info">
+                        <strong>Que es arte?</strong>
+                        <span>Museo Casa Carnacini, San Martin · 2025</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <h3 class="expo-subtitulo">Salones</h3>
+            <div class="albums-grid">
+
+                <div class="album-card" data-album="prilidiano" tabindex="0" role="button" aria-label="Ver exposicion Premio Prilidiano Pueyrredon">
+                    <img class="album-cover" src="Prilidiano_portada.jpg" alt="Portada Premio Prilidiano Pueyrredon" loading="lazy">
+                    <div class="album-info">
+                        <strong>Premio Prilidiano Pueyrredon</strong>
+                        <span>Casa Nacional del Bicentenario, CABA · 2025</span>
+                    </div>
+                </div>
+
+                <div class="album-card" data-album="salon-nacional" tabindex="0" role="button" aria-label="Ver exposicion Salon Nacional">
+                    <img class="album-cover" src="SalonNacional_portada.jpg" alt="Portada Salon Nacional" loading="lazy">
+                    <div class="album-info">
+                        <strong>Salon Nacional de Artes Visuales</strong>
+                        <span>Azul, Buenos Aires · 2025</span>
+                    </div>
+                </div>
+
+                <div class="album-card" data-album="medanos" tabindex="0" role="button" aria-label="Ver exposicion Salon Pequeno Formato Medanos">
+                    <img class="album-cover" src="Medanos_portada.jpg" alt="Portada Salon Pequeno Formato" loading="lazy">
+                    <div class="album-info">
+                        <strong>XXI Salon Pequeno Formato</strong>
+                        <span>Centro Cultural Medanos, La Pampa · 2025</span>
+                    </div>
+                </div>
+
+                <div class="album-card" data-album="pettoruti" tabindex="0" role="button" aria-label="Ver exposicion Salon Provincial de Arte Joven">
+                    <img class="album-cover" src="Pettoruti_portada.jpg" alt="Portada Salon Provincial de Arte Joven" loading="lazy">
+                    <div class="album-info">
+                        <strong>Salon Provincial de Arte Joven</strong>
+                        <span>Museo Pettoruti, La Plata · 2023</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Vistas interiores de cada album -->
+
+        <div class="album-detail" id="album-muestra-3">
+            <div class="album-detail-header">
+                <button class="btn-volver" data-back>&#8592; Volver</button>
+                <div>
+                    <h3>Matices de nuestra identidad</h3>
+                    <p>Casa Mercado, San Martin</p>
+                </div>
+            </div>
+            <div class="album-gallery" data-expo-gallery>
+                <img src="Muestra3_1.jpg" alt="Muestra 3 - foto 1" tabindex="0" loading="lazy">
+                <img src="Muestra3_2.jpg" alt="Muestra 3 - foto 2" tabindex="0" loading="lazy">
+                <img src="Muestra3_3.jpg" alt="Muestra 3 - foto 3" tabindex="0" loading="lazy">
+            </div>
+        </div>
+
+        <div class="album-detail" id="album-barrial-fantasy">
+            <div class="album-detail-header">
+                <button class="btn-volver" data-back>← Volver</button>
+                <div>
+                    <h3>Barrial Fantasy</h3>
+                    <p>Fabrica de Estampas, CABA · 2025</p>
+                </div>
+            </div>
+            <div class="album-gallery" data-expo-gallery>
+                <img src="BarrialFantasy_1.jpg" alt="Barrial Fantasy - foto 1" tabindex="0" loading="lazy">
+                <img src="BarrialFantasy_2.jpg" alt="Barrial Fantasy - foto 2" tabindex="0" loading="lazy">
+                <img src="BarrialFantasy_3.jpg" alt="Barrial Fantasy - foto 3" tabindex="0" loading="lazy">
+            </div>
+        </div>
+
+        <div class="album-detail" id="album-que-es-arte">
+            <div class="album-detail-header">
+                <button class="btn-volver" data-back>← Volver</button>
+                <div>
+                    <h3>Que es arte?</h3>
+                    <p>Museo Casa Carnacini, San Martin · 2025</p>
+                </div>
+            </div>
+            <div class="album-gallery" data-expo-gallery>
+                <img src="QueEsArte_1.jpg" alt="Que es arte? - foto 1" tabindex="0" loading="lazy">
+                <img src="QueEsArte_2.jpg" alt="Que es arte? - foto 2" tabindex="0" loading="lazy">
+                <img src="QueEsArte_3.jpg" alt="Que es arte? - foto 3" tabindex="0" loading="lazy">
+            </div>
+        </div>
+
+        <div class="album-detail" id="album-prilidiano">
+            <div class="album-detail-header">
+                <button class="btn-volver" data-back>← Volver</button>
+                <div>
+                    <h3>Premio Prilidiano Pueyrredon</h3>
+                    <p>Casa Nacional del Bicentenario, CABA · 2025</p>
+                </div>
+            </div>
+            <div class="album-gallery" data-expo-gallery>
+                <img src="Prilidiano_1.jpg" alt="Prilidiano - foto 1" tabindex="0" loading="lazy">
+                <img src="Prilidiano_2.jpg" alt="Prilidiano - foto 2" tabindex="0" loading="lazy">
+                <img src="Prilidiano_3.jpg" alt="Prilidiano - foto 3" tabindex="0" loading="lazy">
+            </div>
+        </div>
+
+        <div class="album-detail" id="album-salon-nacional">
+            <div class="album-detail-header">
+                <button class="btn-volver" data-back>← Volver</button>
+                <div>
+                    <h3>Salon Nacional de Artes Visuales</h3>
+                    <p>Azul, Buenos Aires · 2025</p>
+                </div>
+            </div>
+            <div class="album-gallery" data-expo-gallery>
+                <img src="SalonNacional_1.jpg" alt="Salon Nacional - foto 1" tabindex="0" loading="lazy">
+                <img src="SalonNacional_2.jpg" alt="Salon Nacional - foto 2" tabindex="0" loading="lazy">
+                <img src="SalonNacional_3.jpg" alt="Salon Nacional - foto 3" tabindex="0" loading="lazy">
+            </div>
+        </div>
+
+        <div class="album-detail" id="album-medanos">
+            <div class="album-detail-header">
+                <button class="btn-volver" data-back>← Volver</button>
+                <div>
+                    <h3>XXI Salon Pequeno Formato</h3>
+                    <p>Centro Cultural Medanos, La Pampa · 2025</p>
+                </div>
+            </div>
+            <div class="album-gallery" data-expo-gallery>
+                <img src="Medanos_1.jpg" alt="Medanos - foto 1" tabindex="0" loading="lazy">
+                <img src="Medanos_2.jpg" alt="Medanos - foto 2" tabindex="0" loading="lazy">
+                <img src="Medanos_3.jpg" alt="Medanos - foto 3" tabindex="0" loading="lazy">
+            </div>
+        </div>
+
+        <div class="album-detail" id="album-pettoruti">
+            <div class="album-detail-header">
+                <button class="btn-volver" data-back>← Volver</button>
+                <div>
+                    <h3>Salon Provincial de Arte Joven</h3>
+                    <p>Museo Pettoruti, La Plata · 2023</p>
+                </div>
+            </div>
+            <div class="album-gallery" data-expo-gallery>
+                <img src="Pettoruti_1.jpg" alt="Pettoruti - foto 1" tabindex="0" loading="lazy">
+                <img src="Pettoruti_2.jpg" alt="Pettoruti - foto 2" tabindex="0" loading="lazy">
+                <img src="Pettoruti_3.jpg" alt="Pettoruti - foto 3" tabindex="0" loading="lazy">
+            </div>
+        </div>
+
+        <!-- Lightbox para exposiciones -->
+        <div id="expo-lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Visor de exposicion">
+            <button class="close" id="expo-close" type="button" aria-label="Cerrar visor">x</button>
+            <button class="prev" id="expo-prev" type="button" aria-label="Imagen anterior">&#8249;</button>
+            <img id="expo-lightbox-img" src="" alt="Imagen ampliada de la exposicion">
+            <button class="next" id="expo-next" type="button" aria-label="Siguiente imagen">&#8250;</button>
+            <p id="expo-lightbox-desc" aria-live="polite"></p>
+        </div>
+
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section">
+        <div class="contacto-box">
+            <h2>Contacto</h2>
+            <p><strong>Email:</strong><br>
+                <a href="/cdn-cgi/l/email-protection#c6a8a7aeb3a3aae8b2b4afa4b3aaa986a3bea7abb6aaa3e8a5a9ab"><span class="__cf_email__" data-cfemail="cca2ada4b9a9a0e2b8bea5aeb9a0a38ca9b4ada1bca0a9e2afa3a1">[email&#160;protected]</span></a>
+            </p>
+            <p><strong>Instagram:</strong><br>
+                <a href="https://www.instagram.com/conurvago" target="_blank" rel="noopener noreferrer">@conurvago</a>
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    /* ======================================= */
+    /* Navegacion principal                    */
+    /* ======================================= */
+    const links = document.querySelectorAll('.menu a[data-section]');
+    const sections = document.querySelectorAll('.section');
+
+    function setActiveLink(id) {
+        links.forEach(link => {
+            const isActive = link.dataset.section === id;
+            link.classList.toggle('active', isActive);
+            link.setAttribute('aria-current', isActive ? 'page' : 'false');
+        });
+    }
+
+    function showSection(id) {
+        sections.forEach(s => s.classList.remove('visible'));
+        const target = document.getElementById(id);
+        if (!target) return;
+        target.classList.add('visible');
+        setActiveLink(id);
+        if (id === 'exposiciones') showAlbumsGrid();
+    }
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            showSection(link.dataset.section);
+            history.pushState(null, '', '#' + link.dataset.section);
+        });
+    });
+
+    /* ======================================= */
+    /* Lightbox Pinturas                       */
+    /* ======================================= */
+    let currentIndex = 0;
+    const galleryImages = Array.from(document.querySelectorAll('.gallery img'));
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxDesc = document.getElementById('lightbox-desc');
+    const descriptions = [
+        "Gaucho turro - oleo s/tela - 2024",
+        "Ranchada - oleo s/tela - 2025",
+        "Tarde en el rioba - oleo s/tela - 2023",
+        "El rioba - acrilico s/papel - 2022",
+        "Clasico - oleo s/tela - 2024",
+        "El perrito se fue de casa - oleo s/tela - 2024",
+        "Debi terminar mis pinturas - oleo s/papel - 2025",
+        "Bebu - oleo s/tela - 2024",
+        "Clark Kent - oleo s/papel - 2024",
+        "Perreo otonal - oleo s/tela - 2024",
+        "La noche - oleo s/tela - 2024",
+        "Los ladris - oleo s/tela - 2024"
+    ];
+
+    function openLightbox(index) {
+        currentIndex = index;
+        lightboxImg.src = galleryImages[index].src;
+        lightboxImg.alt = galleryImages[index].alt;
+        lightboxDesc.textContent = descriptions[index] || '';
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function changeImage(dir) {
+        currentIndex = (currentIndex + dir + galleryImages.length) % galleryImages.length;
+        lightboxImg.src = galleryImages[currentIndex].src;
+        lightboxImg.alt = galleryImages[currentIndex].alt;
+        lightboxDesc.textContent = descriptions[currentIndex] || '';
+    }
+
+    galleryImages.forEach((img, i) => {
+        img.addEventListener('click', () => openLightbox(i));
+        img.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
+        });
+    });
+
+    document.querySelector('#lightbox .close').addEventListener('click', closeLightbox);
+    document.querySelector('#lightbox .prev').addEventListener('click', () => changeImage(-1));
+    document.querySelector('#lightbox .next').addEventListener('click', () => changeImage(1));
+
+    document.addEventListener('keydown', e => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
+        }
+    });
+
+    /* ======================================= */
+    /* Exposiciones - Albums                   */
+    /* ======================================= */
+    const albumsGrid = document.getElementById('albums-grid');
+    const albumDetails = document.querySelectorAll('.album-detail');
+
+    function showAlbumsGrid() {
+        albumsGrid.style.display = 'block';
+        albumDetails.forEach(d => d.classList.remove('visible'));
+    }
+
+    function showAlbumDetail(albumId) {
+        albumsGrid.style.display = 'none';
+        albumDetails.forEach(d => d.classList.remove('visible'));
+        const detail = document.getElementById('album-' + albumId);
+        if (detail) detail.classList.add('visible');
+        document.getElementById('exposiciones').scrollTop = 0;
+    }
+
+    document.querySelectorAll('.album-card').forEach(card => {
+        card.addEventListener('click', () => showAlbumDetail(card.dataset.album));
+        card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showAlbumDetail(card.dataset.album); }
+        });
+    });
+
+    document.querySelectorAll('[data-back]').forEach(btn => {
+        btn.addEventListener('click', showAlbumsGrid);
+    });
+
+    /* ======================================= */
+    /* Lightbox Exposiciones                   */
+    /* ======================================= */
+    let expoCurrentIndex = 0;
+    let expoImages = [];
+    const expoLightbox = document.getElementById('expo-lightbox');
+    const expoLightboxImg = document.getElementById('expo-lightbox-img');
+    const expoLightboxDesc = document.getElementById('expo-lightbox-desc');
+
+    function openExpoLightbox(imgs, index) {
+        expoImages = imgs;
+        expoCurrentIndex = index;
+        expoLightboxImg.src = expoImages[index].src;
+        expoLightboxImg.alt = expoImages[index].alt;
+        expoLightboxDesc.textContent = expoImages[index].alt || '';
+        expoLightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeExpoLightbox() {
+        expoLightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function changeExpoImage(dir) {
+        expoCurrentIndex = (expoCurrentIndex + dir + expoImages.length) % expoImages.length;
+        expoLightboxImg.src = expoImages[expoCurrentIndex].src;
+        expoLightboxImg.alt = expoImages[expoCurrentIndex].alt;
+        expoLightboxDesc.textContent = expoImages[expoCurrentIndex].alt || '';
+    }
+
+    document.querySelectorAll('[data-expo-gallery]').forEach(gallery => {
+        gallery.addEventListener('click', e => {
+            const img = e.target.closest('img');
+            if (!img) return;
+            const imgs = Array.from(gallery.querySelectorAll('img'));
+            openExpoLightbox(imgs, imgs.indexOf(img));
+        });
+    });
+
+    document.getElementById('expo-close').addEventListener('click', closeExpoLightbox);
+    document.getElementById('expo-prev').addEventListener('click', () => changeExpoImage(-1));
+    document.getElementById('expo-next').addEventListener('click', () => changeExpoImage(1));
+
+    document.addEventListener('keydown', e => {
+        if (expoLightbox.style.display === 'flex') {
+            if (e.key === 'Escape') closeExpoLightbox();
+            if (e.key === 'ArrowLeft') changeExpoImage(-1);
+            if (e.key === 'ArrowRight') changeExpoImage(1);
+        }
+    });
+
+    /* ========================
